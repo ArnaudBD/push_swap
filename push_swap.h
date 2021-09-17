@@ -17,5 +17,10 @@ struct s_list
 };
 
 void    swap(t_list *stack);
+void    rotate(t_list *stack);
+t_list *insert_on_top(t_list *stack, int number);
+char	**ft_split(char const *s, char c);
+int	ft_strlen(const char *s);
+
 
 #endif

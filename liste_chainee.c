@@ -50,15 +50,35 @@ int	ft_atoi(const char *str)
 int main(int argc, char const *argv[])
 {
 	int i;
-	t_list *stack = NULL;
-	i = argc - 1;
-	printf("argc == %d\n", argc);
 
-	while(i > 0)
+	t_list *stack;
+	stack = NULL;
+	i = 0;
+
+	if(argc > 2)
 	{
-		stack = insert_on_top(stack, ft_atoi(argv[i]));
-		stack->pos = i;
+		i = argc - 1;
+
+		while(i > 0)
+		{
+			stack = insert_on_top(stack, ft_atoi(argv[i]));
+			stack->pos = i;
+			i--;
+		}
+	}
+	else if (argc == 2)
+	{
+		char	**tab;
+		tab = ft_split(argv[1], ' ');
+		while(tab[i] != NULL)
+			i++;
 		i--;
+		while (i >= 0)
+		{
+			stack = insert_on_top(stack, ft_atoi(tab[i]));
+			stack->pos = i + 1;
+			i--;
+		}
 	}
 	t_list *current = stack;
 
@@ -75,8 +95,20 @@ int main(int argc, char const *argv[])
 
 		while(current != NULL)
 	{
-		printf("number2   == %d\n", current->value);
-		printf("position2 == %d\n\n", current->pos);
+		printf("swap_number   == %d\n", current->value);
+		printf("swap_position == %d\n\n", current->pos);
+		current = current->next;
+	}
+
+	rotate(stack);
+
+	current = stack;
+
+
+	while(current != NULL)
+	{
+		printf("rotate_number   == %d\n", current->value);
+		printf("rotate_position == %d\n\n", current->pos);
 		current = current->next;
 	}
 
