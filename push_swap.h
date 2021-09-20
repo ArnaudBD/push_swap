@@ -16,11 +16,13 @@ struct s_list
     t_list	*next;
 };
 
-void    swap(t_list *stack);
-void    rotate(t_list *stack);
+t_list  *swap(t_list *stack);
+t_list  *rotate(t_list *stack);
 t_list *insert_on_top(t_list *stack, int number);
 char	**ft_split(char const *s, char c);
 int	ft_strlen(const char *s);
+t_list  *restore_pos(t_list *stack);
+
 
 
 #endif

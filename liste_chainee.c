@@ -89,7 +89,7 @@ int main(int argc, char const *argv[])
 		current = current->next;
 	}
 
-	swap(stack);
+	stack = swap(stack);
 	
 	current = stack;
 
@@ -100,7 +100,7 @@ int main(int argc, char const *argv[])
 		current = current->next;
 	}
 
-	rotate(stack);
+	stack = rotate(stack);
 
 	current = stack;
 
