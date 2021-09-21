@@ -57,9 +57,43 @@ t_list  *rotate(t_list *stack)
 
     printf("last->next == %p\n", last->next);
     printf("last->value == %d\n\n\n", last->value);
-    //last->next->next = NULL;
 
-    stack = insert_on_top(tmp, last->value);
+    	// t_list *current = stack;
+
+	// while(current != NULL)
+	// {
+	// 	printf("number   == %d\n", current->value);
+	// 	printf("position == %d\n\n", current->pos);
+	// 	current = current->next;
+	// }
+
+    //     printf("----------------------------------------\n");
+
+    // stack = insert_on_top(tmp, last->value);
+
+    // 	current = stack;
+
+	// while(current != NULL)
+	// {
+	// 	printf("number   == %d\n", current->value);
+	// 	printf("position == %d\n\n", current->pos);
+	// 	current = current->next;
+	// }
+
+    //     printf("----------------------------------------\n");
+
+    stack = restore_pos(stack);
+
+    	// current = stack;
+
+	// while(current != NULL)
+	// {
+	// 	printf("number   == %d\n", current->value);
+	// 	printf("position == %d\n\n", current->pos);
+	// 	current = current->next;
+	// }
+    //     printf("----------------------------------------\n");
+
 
     // free(tmp);
     
