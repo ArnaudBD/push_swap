@@ -99,33 +99,21 @@ t_list  *rotate(t_list *stack)
 
 void    push(t_list **stack, char dest)
 {
+
     t_list  *tmp;
-    // stack[0] => a
-    // stack[1] => b
-
-// a : h -> i -> j
-// b : m -> n -> o
-
-// stack[0] = h
-// stack[1] = m
-if (dest == 'a')
-{
-    tmp = stack[1]->next;       // tmp = n  
-    stack[1]->next = stack[0];  // m -> h -> i -> j 
-    stack[0] = stack[1];        // a : m -> h -> i -> j
-    stack[1] = tmp;             // b : n -> o
-                                // a : m -> h -> i ->j
-                                // b : n -> o
-}
-else
-{
-    tmp = stack[0]->next;
-    stack[0]->next = stack[1];
-    stack[1] = stack[0];
-    stack[0] = tmp;
-}
-
-    //
-    // ton code
-    //
+    if (dest == 'a' && stack[1] != NULL)
+    {
+        tmp = stack[1]->next;
+        printf("OK\n");
+        stack[1]->next = stack[0];
+        stack[0] = stack[1];
+        stack[1] = tmp;
     }
+    else if (dest == 'b' && stack[0] != NULL)
+    {
+        tmp = stack[0]->next;
+        stack[0]->next = stack[1];
+        stack[1] = stack[0];
+        stack[0] = tmp;
+    }
+}

@@ -20,13 +20,22 @@ int main(int argc, char const *argv[])
 		current[0] = current[0]->next;
 	}
 
+	current[1] = stack [1];
+		while(current[1] != NULL)
+	{
+		printf("b_number   == %d\n", current[1]->value);
+		printf("b_position == %d\n\n", current[1]->pos);
+		current[1] = current[1]->next;
+	}
+
+
 	stack[0] = swap(stack[0]);
 	
 	current[0] = stack[0];
 	while(current[0] != NULL)
 	{
-		printf("number   == %d\n", current[0]->value);
-		printf("position == %d\n\n", current[0]->pos);
+		printf("swapped_number   == %d\n", current[0]->value);
+		printf("swapped_position == %d\n\n", current[0]->pos);
 		current[0] = current[0]->next;
 	}
 
@@ -35,18 +44,17 @@ int main(int argc, char const *argv[])
 	current[0] = stack[0];
 	while(current[0] != NULL)
 	{
-		printf("number   == %d\n", current[0]->value);
-		printf("position == %d\n\n", current[0]->pos);
+		printf("rotated_number   == %d\n", current[0]->value);
+		printf("rotated_position == %d\n\n", current[0]->pos);
 		current[0] = current[0]->next;
 	}
 
-	push(stack, 'a');
-
+	push(stack, 'b');
 	current[0] = stack[0];
 	while(current[0] != NULL)
 	{
-		printf("number   == %d\n", current[0]->value);
-		printf("position == %d\n\n", current[0]->pos);
+		printf("pushed_number   == %d\n", current[0]->value);
+		printf("pushed_position == %d\n\n", current[0]->pos);
 		current[0] = current[0]->next;
 	}
 
