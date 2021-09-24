@@ -14,39 +14,17 @@ t_list *insert_on_top(t_list *stack, int number)
 	return (stack);
 }
 
-
-t_list	*create_stack(t_list *stack, int argc, const char **argv)
+int count_int(t_list *stack)
 {
-	int i;
+    int i;
 
-	i = 0;
-
-	if(argc > 2)
-	{
-		i = argc - 1;
-
-		while(i > 0)
-		{
-			stack = insert_on_top(stack, ft_atoi(argv[i]));
-			stack->pos = i;
-			i--;
-		}
-	}
-	else if (argc == 2)
-	{
-		char	**tab;
-		tab = ft_split(argv[1], ' ');
-		while(tab[i] != NULL)
-			i++;
-		i--;
-		while (i >= 0)
-		{
-			stack = insert_on_top(stack, ft_atoi(tab[i]));
-			stack->pos = i + 1;
-			i--;
-		}
-	}
-	return (stack);
+    i = 0;
+    while (stack != NULL)
+        {
+            stack = stack->next;
+            i++;
+        }
+    return (i);
 }
 
 t_list  *restore_pos(t_list *stack)
@@ -97,6 +75,27 @@ t_list  *rotate(t_list *stack)
     return (stack);
 }
 
+t_list *reverse_rotate(t_list *stack)
+{
+    t_list *last;
+    t_list *tmp;
+
+    last = stack;
+    while (last->next != NULL)
+        {
+        if(last->next->next == NULL)
+            tmp = last;
+        last = last->next;
+        }
+    last->next = stack;
+    stack = last;
+    tmp->next = NULL;
+
+    stack = restore_pos(stack);
+
+    return (stack);
+}
+
 void    push(t_list **stack, char dest)
 {
 
@@ -116,4 +115,8 @@ void    push(t_list **stack, char dest)
         stack[1] = stack[0];
         stack[0] = tmp;
     }
+    stack[0] = restore_pos(stack[0]);
+    stack[0] = restore_pos(stack[0]);
+    return ;
+
 }
