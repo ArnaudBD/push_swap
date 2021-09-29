@@ -2,44 +2,54 @@
 
 t_list *targeter(t_list *stack)
 {
-    int i;
     int tmp;
+    int i;
     int max;
+    int nb;
     int last_assigned;
     t_list  *current;
 
     i = 1;
     current = stack;
     last_assigned = current->value;
-    max = count_int(stack);
-    while (current->next != NULL)
+    max = current->value;
+    nb = count_int(stack);
+    while (current != NULL)
     {
         if (current->value < last_assigned)
+        {
             last_assigned = current->value;
+            current->target = i;
+        }
         current = current->next;
-    }    
-
-    while (i <= max)
+    }
+    current = stack;
+    while (current != NULL)
     {
-        tmp = last_assigned;
+        if(current->value > max)
+            max = current->value;
+        current = current->next;
+    }
+    while (i++ <= nb)
+    {
+
         current = stack;
-        while (current->next != NULL)
+        while(current != NULL)
+        {
+            if(current->value > last_assigned && current->value <= max)
+                current->target = i;
+            current = current->next;
+        }
+        current = stack;
+        tmp = max;
+        while(current != NULL)
         {
             if(current->value > last_assigned && current->value < tmp)
                 tmp = current->value;
             current = current->next;
         }
         last_assigned = tmp;
-        current = stack;
-        while (current->next != NULL)
-        {
-            if (current->value > last_assigned)
-                current->target = i;
-            current = current->next;
-        }
-        i++;
     }
-
     return (stack);
 }
 

@@ -9,15 +9,24 @@ int main(int argc, char const *argv[])
 	stack[1] = NULL;
 	stack[0] = create_stack(stack[0], argc, argv);
 	current[0] = stack[0];
-	
-	// if(count_int(stack[0]) == 3)
-	// 	three_numbers_sort(stack[0]);
-printf("OK\n");
 
 while (current[0] != NULL)
 {
 		printf("number   == %d\n", current[0]->value);
-		printf("position == %d\n\n", current[0]->pos);
+		printf("position == %d\n", current[0]->pos);
+	 	printf("target == %d\n\n", current[0]->target);
+	current[0] = current[0]->next;
+}
+	
+printf("count_int == %d\n", count_int(stack[0]));
+	if(count_int(stack[0]) == 3)
+		three_numbers_sort(stack[0]);
+printf("----------------------------------------------\n");
+current[0] = stack[0];
+while (current[0] != NULL)
+{
+		printf("number   == %d\n", current[0]->value);
+		printf("position == %d\n", current[0]->pos);
 	 	printf("target == %d\n\n", current[0]->target);
 	current[0] = current[0]->next;
 }
