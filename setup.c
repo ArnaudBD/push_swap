@@ -11,6 +11,7 @@ t_list *targeter(t_list *stack)
 
     i = 1;
     current = stack;
+    current->target = i;
     last_assigned = current->value;
     max = current->value;
     nb = count_int(stack);
