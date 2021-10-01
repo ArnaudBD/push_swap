@@ -68,7 +68,8 @@ t_list  *rotate(t_list *stack)
     while (last->next != NULL)
         last = last->next;
 
-    last->next = insert_on_top(last->next, tmp->value);
+    last->next = tmp;
+    tmp->next = NULL;
 
     stack = restore_pos(stack);
 
@@ -103,7 +104,6 @@ void    push(t_list **stack, char dest)
     if (dest == 'a' && stack[1] != NULL)
     {
         tmp = stack[1]->next;
-        printf("OK\n");
         stack[1]->next = stack[0];
         stack[0] = stack[1];
         stack[1] = tmp;

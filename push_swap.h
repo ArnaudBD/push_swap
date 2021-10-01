@@ -38,10 +38,9 @@ t_list  *three_numbers_sort(t_list *stack);
 //setup.c
 t_list *targeter(t_list *stack);
 t_list	*create_stack(t_list *stack, int argc, const char **argv);
+int stack_size(t_list *stack);
 
-
-
-
-
+//big_sort.c
+void    move_to_b(t_list **stack);
 
 #endif

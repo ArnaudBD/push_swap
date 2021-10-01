@@ -88,3 +88,18 @@ t_list	*create_stack(t_list *stack, int argc, const char **argv)
     stack = targeter(stack);
 	return (stack);
 }
+
+int stack_size(t_list *stack)
+{
+    int i;
+    t_list  *current;
+
+    i = 0;
+    current = stack;
+    while (current != NULL)
+    {
+        current = current->next;
+        i++;
+    }
+    return (i);
+}
