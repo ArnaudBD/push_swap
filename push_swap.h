@@ -33,7 +33,7 @@ int	ft_isdigit(int c);
 int	ft_atoi(const char *str);
 
 //3n_sort.c
-void    three_numbers_sort(t_list *stack);
+t_list  *three_numbers_sort(t_list *stack);
 
 //setup.c
 t_list *targeter(t_list *stack);
