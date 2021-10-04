@@ -36,6 +36,7 @@ void	show_stacks(t_list *stacka, t_list *stackb)
 int main(int argc, char const *argv[])
 {
 	t_list	*stack[2];
+	t_list	*current[2];
 
 	stack[0] = NULL;
 	stack[1] = NULL;
@@ -56,7 +57,15 @@ int main(int argc, char const *argv[])
 
 	show_stacks(stack[0], stack[1]);
 
+	stack[1] = upset(stack[1]);
 
+	current[1] = stack[1];
+	while (current[1])
+	{
+		printf("number == %d\ntarget == %d\nposition == %d\nup == %d\n\n", current[1]->value, current[1]->target, current[1]->pos, current[1]->up);
+		current[1] = current[1]->next;
+	}
+	
 
 
 

@@ -11,8 +11,8 @@ struct s_list
     int	value;
     int	pos;
     int	target;
-    // int	winer;
-    // t_list	*prev;
+    int	dist;
+    int up;
     t_list	*next;
 };
 // stack_ops.c
@@ -42,5 +42,8 @@ int stack_size(t_list *stack);
 
 //big_sort.c
 void    move_to_b(t_list **stack);
+t_list  *upset(t_list *stack);
+int isup(int pos, int size);
+
 
 #endif

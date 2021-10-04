@@ -116,7 +116,7 @@ void    push(t_list **stack, char dest)
         stack[0] = tmp;
     }
     stack[0] = restore_pos(stack[0]);
-    stack[0] = restore_pos(stack[0]);
+    stack[1] = restore_pos(stack[1]);
     return ;
 
 }

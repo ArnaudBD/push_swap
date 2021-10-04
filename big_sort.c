@@ -1,21 +1,16 @@
 #include "push_swap.h"
 
-void    big_sort(t_list **stack, t_list *stackA, t_list *stackB)
-{
-    int i;
-    t_list *current;
+// void    big_sort(t_list **stack, t_list *stackA, t_list *stackB)
+// {
+//     int i;
+//     t_list *current;
 
-    i = 1;
-    move_to_b(stack);
-    
+//     i = 1;
+//     move_to_b(stack);
+//     stack = upset(stack);
+//     distance_calculator(stack);
 
-    while(i < stack_size(stackB))
-    {
-        if(distance(stackA, stackB))
-        i++;
-    }
-
-}
+// }
 
 void    move_to_b(t_list **stack)
 {
@@ -50,33 +45,68 @@ void    move_to_b(t_list **stack)
     return ;
 }
 
-int distance(t_list *stackA, t_list *satckB)
-{
-    t_list  *currentA;
-    t_list  *currentB;
-    int i;
-    int d;
 
-    currentA = stackA;
-    currentB = satckB;
-    while (currentB != NULL)
-    {
-        while(currentA != NULL)
-        {
-            if(currentA->target == (currentB->target + 1))
-            {
-                if(currentB->pos > (stack_size(satckB) / 2)
-                    d = (stack_size(stackB) - currentB->pos) + (distance dans la stackA)
-                else
-                    d = 
-            }
-        }
+
+// int distance_calculator(t_list **stack)
+// {
+//     t_list  *currentA;
+//     t_list  *currentB;
+//     int i;
+//     int d;
+
+//     currentA = stackA;
+//     currentB = satckB;
+//     while (currentB != NULL)
+//     {
+//         while(currentA != NULL)
+//         {
+//             if(currentA->target == (currentB->target + 1))
+//             {
+//                 if(currentB->pos > (stack_size(satckB) / 2)
+//                     d = (stack_size(stackB) - currentB->pos) + (distance dans la stackA)
+//                 else
+//                     d = 
+//             }
+//         }
         
-        if(currentB->target == (stack_size(stackA) + stack_size(satckB)))
+//         if(currentB->target == (stack_size(stackA) + stack_size(satckB)))
             
 
-        currentB = currentB->next;
+//         currentB = currentB->next;
+//     }}
+
+
+
+
+t_list  *upset(t_list *stack)
+{
+    t_list *current;
+    int size;
+
+    size = stack_size(stack);
+    current = stack;
+    while(current != NULL)
+    {
+        current->up = isup(current->pos, size);
+        current = current->next;
     }
+    return (stack);
+}
 
+int isup(int pos, int size)
+{
+    printf("------------------------pos == %d-------------size == %d\n", pos, size);
+    if((size / 2) > pos)
+        return (1);
+    else
+        return (0);
+    
+}
 
+void    distance_calculator(t_list **stack)
+{
+    while(stack[1] != NULL)
+    {
+
+    }
 }
