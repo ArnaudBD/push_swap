@@ -50,19 +50,16 @@ int main(int argc, char const *argv[])
 		printf("count_int == %d\n\n", count_int(stack[0]));
 	}
 	else
-		move_to_b(stack);
+		big_sort(stack);
 		
 	printf("-----------------------------sorted?-------------------------------\n");
 
-
 	show_stacks(stack[0], stack[1]);
-
-	stack[1] = upset(stack[1]);
 
 	current[1] = stack[1];
 	while (current[1])
 	{
-		printf("number == %d\ntarget == %d\nposition == %d\nup == %d\n\n", current[1]->value, current[1]->target, current[1]->pos, current[1]->up);
+		printf("number == %d\ntarget == %d\nposition == %d\nup == %d\ndist == %d\n\n", current[1]->value, current[1]->target, current[1]->pos, current[1]->up, current[1]->dist);
 		current[1] = current[1]->next;
 	}
 	

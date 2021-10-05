@@ -1,16 +1,13 @@
 #include "push_swap.h"
 
-// void    big_sort(t_list **stack, t_list *stackA, t_list *stackB)
-// {
-//     int i;
-//     t_list *current;
-
-//     i = 1;
-//     move_to_b(stack);
-//     stack = upset(stack);
-//     distance_calculator(stack);
-
-// }
+void    big_sort(t_list **stack)
+{
+    move_to_b(stack);
+    show_stacks(stack[0], stack[1]);
+    stack[0] = upset(stack[0]);
+    stack[1] = upset(stack[1]);
+    distance_set(stack);
+}
 
 void    move_to_b(t_list **stack)
 {
@@ -95,18 +92,66 @@ t_list  *upset(t_list *stack)
 
 int isup(int pos, int size)
 {
-    printf("------------------------pos == %d-------------size == %d\n", pos, size);
-    if((size / 2) > pos)
+    if((size / 2) >= pos)
         return (1);
     else
         return (0);
     
 }
 
-void    distance_calculator(t_list **stack)
+void    distance_set(t_list **stack)
 {
-    while(stack[1] != NULL)
-    {
+    t_list *current[2];
 
+    current[0] = stack[0];
+    current[1] = stack[1];
+    while(current[1] != NULL)
+    {
+        current[1]->dist = distance_calculator(current, stack_size(stack[0]), stack_size(stack[1]));
+        current[1] = current[1]->next;
     }
+    return ;
+}
+
+int distance_calculator(t_list **stack, int sizeA, int sizeB)
+{
+    t_list *current[2];
+    int d;
+    int i;
+
+    current[0] = stack[0];
+    current[1] = stack[1];
+    i = 1;
+    while(current[0]->target != (stack[1]->target + i))
+    {
+        current[0] = current[0]->next;
+        if(current[0] == NULL)
+        {
+            i++;
+            current[0] = stack[0];
+        }
+    }
+    if(stack[1]->up == 1)
+    {
+        if(current[0]->up == 1)
+        {
+            d = stack[1]->pos + current[0]->pos;
+        }
+        else
+        {
+            d = stack[1]->pos + sizeA - current[0]->pos;
+        }
+    }
+    else
+    {
+        if(current[0]->up == 1)
+        {
+            d = sizeB - stack[1]->pos + current[0]->pos;
+        }
+        else
+        {
+            d = sizeB - stack[1]->pos + sizeA - current[0]->pos;
+        }
+    }
+    return (d);
 }

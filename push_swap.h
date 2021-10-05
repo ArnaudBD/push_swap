@@ -15,6 +15,9 @@ struct s_list
     int up;
     t_list	*next;
 };
+// main.c
+void	show_stacks(t_list *stacka, t_list *stackb);
+
 // stack_ops.c
 t_list *insert_on_top(t_list *stack, int number);
 int count_int(t_list *stack);
@@ -41,9 +44,12 @@ t_list	*create_stack(t_list *stack, int argc, const char **argv);
 int stack_size(t_list *stack);
 
 //big_sort.c
+void    big_sort(t_list **stack);
 void    move_to_b(t_list **stack);
 t_list  *upset(t_list *stack);
 int isup(int pos, int size);
+void    distance_set(t_list **stack);
+int distance_calculator(t_list **stack, int sizeA, int sizeB);
 
 
 #endif

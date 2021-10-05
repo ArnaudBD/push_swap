@@ -2,8 +2,6 @@
 
 t_list  *three_numbers_sort(t_list *stack)
 {
-    printf("stack->target == %d\n\n\n", stack->target);
-    printf("stack->next->target == %d\n\n\n", stack->next->target);
     int i = 0;
     while((stack->target != 1) || (stack->next->target != 2))
     {
