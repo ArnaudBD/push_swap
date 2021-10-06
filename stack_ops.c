@@ -64,6 +64,8 @@ t_list  *rotate(t_list *stack)
     
     last = stack;
     tmp = stack;
+    if(stack->next == NULL)
+        return (stack);
     stack = stack->next;
     while (last->next != NULL)
         last = last->next;
@@ -89,12 +91,12 @@ t_list *reverse_rotate(t_list *stack)
         last = last->next;
         }
     last->next = stack;
-    stack = last;
+    //stack = last;
     tmp->next = NULL;
 
-    stack = restore_pos(stack);
+    last = restore_pos(last);
 
-    return (stack);
+    return (last);
 }
 
 void    push(t_list **stack, char dest)

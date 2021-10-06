@@ -50,6 +50,7 @@ t_list  *upset(t_list *stack);
 int isup(int pos, int size);
 void    distance_set(t_list **stack);
 int distance_calculator(t_list **stack, int sizeA, int sizeB);
-
+t_list *choose_mover(t_list *stack);
+void movers_move(t_list **stack);
 
 #endif

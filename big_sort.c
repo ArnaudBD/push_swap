@@ -1,12 +1,18 @@
 #include "push_swap.h"
 
 void    big_sort(t_list **stack)
-{
+{  
     move_to_b(stack);
-    show_stacks(stack[0], stack[1]);
-    stack[0] = upset(stack[0]);
-    stack[1] = upset(stack[1]);
-    distance_set(stack);
+    while(stack[1] != NULL)
+    {
+        show_stacks(stack[0], stack[1]);
+        stack[0] = upset(stack[0]);
+        stack[1] = upset(stack[1]);
+        distance_set(stack);
+        show_stacks(stack[0], stack[1]);
+        movers_move(stack);
+        show_stacks(stack[0], stack[1]);
+    }
 }
 
 void    move_to_b(t_list **stack)
@@ -19,7 +25,7 @@ void    move_to_b(t_list **stack)
     {
         i = 1;
         current = stack[0];
-        while(current->next != NULL)
+         while(current->next != NULL)
         {
             if(current->target < current->next->target)
                 i++;
@@ -41,39 +47,6 @@ void    move_to_b(t_list **stack)
     }
     return ;
 }
-
-
-
-// int distance_calculator(t_list **stack)
-// {
-//     t_list  *currentA;
-//     t_list  *currentB;
-//     int i;
-//     int d;
-
-//     currentA = stackA;
-//     currentB = satckB;
-//     while (currentB != NULL)
-//     {
-//         while(currentA != NULL)
-//         {
-//             if(currentA->target == (currentB->target + 1))
-//             {
-//                 if(currentB->pos > (stack_size(satckB) / 2)
-//                     d = (stack_size(stackB) - currentB->pos) + (distance dans la stackA)
-//                 else
-//                     d = 
-//             }
-//         }
-        
-//         if(currentB->target == (stack_size(stackA) + stack_size(satckB)))
-            
-
-//         currentB = currentB->next;
-//     }}
-
-
-
 
 t_list  *upset(t_list *stack)
 {
@@ -113,14 +86,12 @@ void    distance_set(t_list **stack)
     return ;
 }
 
-int distance_calculator(t_list **stack, int sizeA, int sizeB)
+t_list *choose_base(t_list **stack)
 {
     t_list *current[2];
-    int d;
     int i;
 
     current[0] = stack[0];
-    current[1] = stack[1];
     i = 1;
     while(current[0]->target != (stack[1]->target + i))
     {
@@ -131,27 +102,107 @@ int distance_calculator(t_list **stack, int sizeA, int sizeB)
             current[0] = stack[0];
         }
     }
+
+    return (current[0]);
+}
+
+int distance_calculator(t_list **stack, int sizeA, int sizeB)
+{
+    t_list *base;
+    int d;
+
+    base = choose_base(stack);
     if(stack[1]->up == 1)
     {
-        if(current[0]->up == 1)
+        if(base->up == 1)
         {
-            d = stack[1]->pos + current[0]->pos;
+            d = stack[1]->pos -1 + base->pos;
         }
         else
         {
-            d = stack[1]->pos + sizeA - current[0]->pos;
+            d = stack[1]->pos - 1 + sizeA - base->pos + 1;
         }
     }
     else
     {
-        if(current[0]->up == 1)
+        if(base->up == 1)
         {
-            d = sizeB - stack[1]->pos + current[0]->pos;
+printf("OK -- sizeB == %d -- %d->pos == %d\n", sizeB, stack[1]->value, stack[1]->pos);
+            d = sizeB - stack[1]->pos + 1 + base->pos - 1;
         }
         else
         {
-            d = sizeB - stack[1]->pos + sizeA - current[0]->pos;
+            d = sizeB - stack[1]->pos + 1 + sizeA - base->pos + 1;
         }
     }
+    printf("Le socle de %d est %d\n", stack[1]->value, base->value);
+    printf("%d->dist == %d\n", stack[1]->value, d);
+    printf("%d->up == %d\n", stack[1]->value, stack[1]->up);
     return (d);
+}
+
+t_list *choose_mover(t_list *stack)
+{
+    t_list *current;
+    t_list *mover;
+
+    current = stack;
+    mover = stack;
+    while(current != NULL)
+    {
+        if(current->dist < mover->dist)
+            mover = current;
+        current = current->next;
+    }
+    return (mover);
+}
+
+void movers_move(t_list **stack)
+{
+    t_list *mover;
+    t_list *base;
+    int i;
+
+    mover = choose_mover(stack[1]);
+    base = choose_base(stack);
+    printf("base == %d\nmover == %d\n\n", base->value, mover->value);
+    if(base->up == 1)
+    {
+        i = base->pos;
+        while(i != 1)
+        {
+            stack[0] = rotate(stack[0]);
+            i--;
+        }
+    }
+    else
+    {
+        i = base->pos - stack_size(stack[0]);
+        while(i != 1)
+        {
+            stack[0] = reverse_rotate(stack[0]);
+            i++;
+        }
+    }
+    
+    if(mover->up == 1)
+    {
+        i = mover->pos;
+        while(i != 1)
+        {
+            stack[1] = rotate(stack[1]);
+            i--;
+        }
+    }
+    else
+    {
+        i = mover->pos - stack_size(stack[1]);
+        while(i != 1)
+        {
+            stack[1] = reverse_rotate(stack[1]);
+            i++;
+        }
+    }
+    push(stack, 'a');
+    return ;
 }

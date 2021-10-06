@@ -9,7 +9,6 @@ void	show_stacks(t_list *stacka, t_list *stackb)
 	current[1] = stackb;
 
 	diff = stack_size(stacka) - stack_size(stackb);
-	printf("diff = %d\n\n", diff);
 	while(diff > 0 && current[0] != NULL)
 	{
 		printf("%2d\n", current[0]->value);
@@ -51,11 +50,6 @@ int main(int argc, char const *argv[])
 	}
 	else
 		big_sort(stack);
-		
-	printf("-----------------------------sorted?-------------------------------\n");
-
-	show_stacks(stack[0], stack[1]);
-
 	current[1] = stack[1];
 	while (current[1])
 	{
