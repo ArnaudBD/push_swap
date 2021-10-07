@@ -74,7 +74,6 @@ int isup(int pos, int size)
 void    distance_set(t_list **stack)
 {
     t_list *current[2];
-
     current[0] = stack[0];
     current[1] = stack[1];
     while(current[1] != NULL)
@@ -100,7 +99,7 @@ t_list *choose_base(t_list **stack)
     }
     else
     {
-        while(current[0]->target != (stack[1]->target + i))
+        while(current[0]->target != (stack[1]->target + i) && i <= (stack_size(stack[0]) + stack_size(stack[1])))
         {
             current[0] = current[0]->next;
             if(current[0] == NULL)

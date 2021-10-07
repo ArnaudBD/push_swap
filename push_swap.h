@@ -23,8 +23,8 @@ t_list *insert_on_top(t_list *stack, int number);
 int count_int(t_list *stack);
 t_list  *restore_pos(t_list *stack);
 t_list  *swap(t_list *stack);
-t_list  *rotate(t_list *stack);
-t_list *reverse_rotate(t_list *stack);
+t_list  *rotate(t_list *stack, int ab);
+t_list *reverse_rotate(t_list *stack, int ab);
 void    push(t_list **stack, char dest);
 
 // split.c

@@ -35,14 +35,14 @@ void	show_stacks(t_list *stacka, t_list *stackb)
 int main(int argc, char const *argv[])
 {
 	t_list	*stack[2];
-	t_list	*current[2];
-	current[0] = stack[0];
+	// t_list	*current[2];
 
 	stack[0] = NULL;
 	stack[1] = NULL;
 	stack[0] = create_stack(stack[0], argc, argv);
+	// current[0] = stack[0];
 
-	show_stacks(stack[0], stack[1]);
+	// show_stacks(stack[0], stack[1]);
 
 	if(count_int(stack[0]) == 3)
 	{
@@ -58,17 +58,24 @@ int main(int argc, char const *argv[])
         stack[0] = upset(stack[0]);
         stack[1] = upset(stack[1]);
         distance_set(stack);
-		while (current[0])
-		{
-			if(current[0]->value == stack)
-		}
-		
+		push(stack, 'a');
+		push(stack, 'a');
+		stack[0] = targeter(stack[0]);
+		push(stack, 'b');
+		push(stack, 'b');
         movers_move(stack);
 	    stack[0] = upset(stack[0]);
+		stack[1] = upset(stack[1]);
 	    movers_move(stack);
+	    stack[0] = upset(stack[0]);
+		stack[1] = upset(stack[1]);
+	    movers_move(stack);
+
 	}
 	else
 		big_sort(stack);
+
+	// show_stacks(stack[0], stack[1]);
 	// current[1] = stack[1];
 	// while (current[1])
 	// {
