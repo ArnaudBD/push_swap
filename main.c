@@ -36,6 +36,7 @@ int main(int argc, char const *argv[])
 {
 	t_list	*stack[2];
 	t_list	*current[2];
+	current[0] = stack[0];
 
 	stack[0] = NULL;
 	stack[1] = NULL;
@@ -45,17 +46,35 @@ int main(int argc, char const *argv[])
 
 	if(count_int(stack[0]) == 3)
 	{
-		stack[0] = three_numbers_sort(stack[0]);
 		printf("count_int == %d\n\n", count_int(stack[0]));
+		stack[0] = three_numbers_sort(stack[0]);
+	}
+	else if(count_int(stack[0]) == 5)
+	{
+		push(stack, 'b');
+		push(stack, 'b');
+		stack[0] = targeter(stack[0]);
+		stack[0] = three_numbers_sort(stack[0]);
+        stack[0] = upset(stack[0]);
+        stack[1] = upset(stack[1]);
+        distance_set(stack);
+		while (current[0])
+		{
+			if(current[0]->value == stack)
+		}
+		
+        movers_move(stack);
+	    stack[0] = upset(stack[0]);
+	    movers_move(stack);
 	}
 	else
 		big_sort(stack);
-	current[1] = stack[1];
-	while (current[1])
-	{
-		printf("number == %d\ntarget == %d\nposition == %d\nup == %d\ndist == %d\n\n", current[1]->value, current[1]->target, current[1]->pos, current[1]->up, current[1]->dist);
-		current[1] = current[1]->next;
-	}
+	// current[1] = stack[1];
+	// while (current[1])
+	// {
+	// 	printf("number == %d\ntarget == %d\nposition == %d\nup == %d\ndist == %d\n\n", current[1]->value, current[1]->target, current[1]->pos, current[1]->up, current[1]->dist);
+	// 	current[1] = current[1]->next;
+	// }
 	
 
 

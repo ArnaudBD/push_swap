@@ -57,7 +57,7 @@ t_list  *swap(t_list *stack)
     return (stack);
 }
 
-t_list  *rotate(t_list *stack)
+t_list  *rotate(t_list *stack, int ab)
 {
     t_list *last;
     t_list *tmp;
@@ -75,15 +75,22 @@ t_list  *rotate(t_list *stack)
 
     stack = restore_pos(stack);
 
+    if(ab == 0)
+        write(1, "ra\n", 3);
+    else
+        write(1, "rb\n", 3);
+
     return (stack);
 }
 
-t_list *reverse_rotate(t_list *stack)
+t_list *reverse_rotate(t_list *stack, int ab)
 {
     t_list *last;
     t_list *tmp;
 
     last = stack;
+    if(stack->next == NULL)
+        return (stack);
     while (last->next != NULL)
         {
         if(last->next->next == NULL)
@@ -95,6 +102,11 @@ t_list *reverse_rotate(t_list *stack)
     tmp->next = NULL;
 
     last = restore_pos(last);
+
+    if(ab == 0)
+        write(1, "rra\n", 4);
+    else
+        write(1, "rrb\n", 4);
 
     return (last);
 }
@@ -109,6 +121,7 @@ void    push(t_list **stack, char dest)
         stack[1]->next = stack[0];
         stack[0] = stack[1];
         stack[1] = tmp;
+        write(1, "pa\n", 3);
     }
     else if (dest == 'b' && stack[0] != NULL)
     {
@@ -116,6 +129,7 @@ void    push(t_list **stack, char dest)
         stack[0]->next = stack[1];
         stack[1] = stack[0];
         stack[0] = tmp;
+        write(1, "pb\n", 3);
     }
     stack[0] = restore_pos(stack[0]);
     stack[1] = restore_pos(stack[1]);
