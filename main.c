@@ -51,25 +51,35 @@ int main(int argc, char const *argv[])
 	}
 	else if(count_int(stack[0]) == 5)
 	{
-		push(stack, 'b');
-		push(stack, 'b');
-		stack[0] = targeter(stack[0]);
-		stack[0] = three_numbers_sort(stack[0]);
-        stack[0] = upset(stack[0]);
-        stack[1] = upset(stack[1]);
-        distance_set(stack);
-		push(stack, 'a');
-		push(stack, 'a');
-		stack[0] = targeter(stack[0]);
-		push(stack, 'b');
-		push(stack, 'b');
-        movers_move(stack);
+		five_numbers_sort(stack);
+// show_stacks(stack[0], stack[1]);
+		// push(stack, 'b');
+		// push(stack, 'b');
+		// stack[0] = targeter(stack[0]);
+		// stack[0] = three_numbers_sort(stack[0]);
+        // stack[0] = upset(stack[0]);
+        // stack[1] = upset(stack[1]);
+        // distance_set(stack);
+		// push(stack, 'a');
+		// push(stack, 'a');
+		// stack[0] = targeter(stack[0]);
+		// push(stack, 'b');
+		// push(stack, 'b');
+        // movers_move(stack);
 	    stack[0] = upset(stack[0]);
 		stack[1] = upset(stack[1]);
 	    movers_move(stack);
+// show_stacks(stack[0], stack[1]);
+		
 	    stack[0] = upset(stack[0]);
 		stack[1] = upset(stack[1]);
 	    movers_move(stack);
+// show_stacks(stack[0], stack[1]);
+
+	    stack[0] = upset(stack[0]);
+		stack[1] = upset(stack[1]);
+	    movers_move(stack);
+
 
 	}
 	else

@@ -53,4 +53,7 @@ int distance_calculator(t_list **stack, int sizeA, int sizeB);
 t_list *choose_mover(t_list *stack);
 void movers_move(t_list **stack);
 
+// 5n_sort.c
+void    five_numbers_sort(t_list **stack);
+
 #endif
