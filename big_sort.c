@@ -14,16 +14,20 @@
 
 void	big_sort(t_list **stack)
 {
+// show_stacks(stack[0], stack[1]);
 	move_to_b(stack);
+// show_stacks(stack[0], stack[1]);
 	while (stack[1] != NULL)
 	{
 		stack[0] = upset(stack[0]);
 		stack[1] = upset(stack[1]);
 		distance_set(stack);
 		movers_move(stack);
+// show_stacks(stack[0], stack[1]);
 	}
 	stack[0] = upset(stack[0]);
 	movers_move(stack);
+// show_stacks(stack[0], stack[1]);
 }
 
 void	move_to_b(t_list **stack)
@@ -95,11 +99,11 @@ t_list	*choose_base(t_list **stack)
 {
 	t_list *current[2];
 	int i;
-	int sizeA;
-	int sizeB;
+	// int sizeA;
+	// int sizeB;
 
-	sizeA = stack_size(stack[0]);
-	sizeB = stack_size(stack[1]);
+	// sizeA = stack_size(stack[0]);
+	// sizeB = stack_size(stack[1]);
 	current[0] = stack[0];
 	i = 1;
 	if(stack[1] == NULL)
@@ -110,7 +114,7 @@ t_list	*choose_base(t_list **stack)
 	}
 	else
 	{
-		while (current[0]->target != (stack[1]->target + i) && i <= sizeA + sizeB)
+		while (current[0]->target != (stack[1]->target + i) && i <= 500)
 		{
 			current[0] = current[0]->next;
 			if (current[0] == NULL)
@@ -123,6 +127,38 @@ t_list	*choose_base(t_list **stack)
 	return (current[0]);
 }
 
+// int	distance_calculator(t_list **stack, int sizeA, int sizeB)
+// {
+// 	t_list *base;
+// 	int d;
+
+// 	base = choose_base(stack);
+// 	if (stack[1]->up == 1)
+// 	{
+// 		if (base->up == 1)
+// 		{
+//             d = stack[1]->pos -1 - base->pos - 1;
+//             if(d < 0)
+//                 d = -d;
+//         }
+// 		else
+// 			d = stack[1]->pos - 1 + sizeA - base->pos + 1;
+// 	}
+// 	else
+// 	{
+// 		if (base->up == 1)
+// 			d = sizeB - stack[1]->pos + 1 + base->pos - 1;
+// 		else
+// 		{
+//         	d = (sizeB - stack[1]->pos + 1) - (sizeA - base->pos + 1);
+//             if (d < 0)
+//                 d = -d;
+//         }
+// 	}
+// 	return (d);
+// }
+
+
 int	distance_calculator(t_list **stack, int sizeA, int sizeB)
 {
 	t_list *base;
@@ -132,7 +168,7 @@ int	distance_calculator(t_list **stack, int sizeA, int sizeB)
 	if (stack[1]->up == 1)
 	{
 		if (base->up == 1)
-			d = stack[1]->pos -1 + base->pos;
+			d = stack[1]->pos -1 + base->pos - 1;
 		else
 			d = stack[1]->pos - 1 + sizeA - base->pos + 1;
 	}
@@ -168,6 +204,8 @@ void	movers_move(t_list **stack)
 	t_list *base;
 	t_list *current[2];
 	int i;
+    int j;
+
 	mover = NULL;
 	if (stack[1] != NULL)
 		mover = choose_mover(stack[1]);
@@ -177,39 +215,109 @@ void	movers_move(t_list **stack)
 	if (base->up == 1)
 	{
 		i = base->pos;
-		while (i != 1)
-		{
-			stack[0] = rotate(stack[0], 0);
-			i--;
-		}
 	}
 	else
 	{
 		i = base->pos - stack_size(stack[0]);
-		while (i != 1)
-		{
-			stack[0] = reverse_rotate(stack[0], 0);
-			i++;
-		}
 	}
 	if (stack[1] != NULL && mover->up == 1)
 	{
-		i = mover->pos;
-		while (i != 1)
-		{
-			stack[1] = rotate(stack[1], 1);
-			i--;
-		}
+		j = mover->pos;
 	}
 	else if (stack[1] != NULL)
 	{
-		i = mover->pos - stack_size(stack[1]);
-		while (i != 1)
-		{
-			stack[1] = reverse_rotate(stack[1], 1);
-			i++;
-		}
+		j = mover->pos - stack_size(stack[1]);
 	}
+    while (i > 1 && j > 1 && stack[1] != NULL)
+    {
+        stack[0] = rotate(stack[0], 3);
+        stack[1] = rotate(stack[1], 3);
+        i--;
+        j--;
+        write(1, "rr\n", 3);
+    }
+    while (i < 1 && j < 1 && stack[1] != NULL)
+    {
+        stack[0] = reverse_rotate(stack[0], 3);
+        stack[1] = reverse_rotate(stack[1], 3);
+        i++;
+        j++;
+        write(1, "rrr\n", 4);
+    }
+    
+    while (i > 1)
+    {
+        stack[0] = rotate(stack[0], 0);
+        i--;
+    }
+    while (i < 1)
+    {
+        stack[0] = reverse_rotate(stack[0], 0);
+        i++;
+    }
+    while (j > 1 && stack[1] != NULL)
+    {
+        stack[1] = rotate(stack[1], 1);
+        j--;
+    }
+    while (j < 1 && stack[1] != NULL)
+    {
+        stack[1] = reverse_rotate(stack[1], 1);
+        j++;
+    }
 	push(stack, 'a');
 	return ;
 }
+
+
+// void	movers_move(t_list **stack)
+// {
+// 	t_list *mover;
+// 	t_list *base;
+// 	t_list *current[2];
+// 	int i;
+// 	mover = NULL;
+// 	if (stack[1] != NULL)
+// 		mover = choose_mover(stack[1]);
+// 	current[0] = stack[0];
+// 	current[1] = mover;
+// 	base = choose_base(current);
+// 	if (base->up == 1)
+// 	{
+// 		i = base->pos;
+// 		while (i != 1)
+// 		{
+// 			stack[0] = rotate(stack[0], 0);
+// 			i--;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		i = base->pos - stack_size(stack[0]);
+// 		while (i != 1)
+// 		{
+// 			stack[0] = reverse_rotate(stack[0], 0);
+// 			i++;
+// 		}
+// 	}
+// 	if (stack[1] != NULL && mover->up == 1)
+// 	{
+// 		i = mover->pos;
+// 		while (i != 1)
+// 		{
+// 			stack[1] = rotate(stack[1], 1);
+// 			i--;
+// 		}
+// 	}
+// 	else if (stack[1] != NULL)
+// 	{
+// 		i = mover->pos - stack_size(stack[1]);
+// 		while (i != 1)
+// 		{
+// 			stack[1] = reverse_rotate(stack[1], 1);
+// 			i++;
+// 		}
+// 	}
+// 	push(stack, 'a');
+// 	return ;
+// }

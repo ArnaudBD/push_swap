@@ -75,9 +75,9 @@ t_list  *rotate(t_list *stack, int ab)
 
     stack = restore_pos(stack);
 
-    if(ab == 0)
+    if (ab == 0)
         write(1, "ra\n", 3);
-    else
+    if (ab == 1)
         write(1, "rb\n", 3);
 
     return (stack);
@@ -98,14 +98,13 @@ t_list *reverse_rotate(t_list *stack, int ab)
         last = last->next;
         }
     last->next = stack;
-    //stack = last;
     tmp->next = NULL;
 
     last = restore_pos(last);
 
-    if(ab == 0)
+    if (ab == 0)
         write(1, "rra\n", 4);
-    else
+    if (ab == 1)
         write(1, "rrb\n", 4);
 
     return (last);
