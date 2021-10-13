@@ -67,6 +67,7 @@ void	movers_move(t_list **stack)
 	int		j;
 
 	mover = NULL;
+	j = 0;
 	if (stack[1] != NULL)
 		mover = choose_mover(stack[1]);
 	current[0] = stack[0];

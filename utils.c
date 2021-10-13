@@ -30,11 +30,11 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
-	int	i;
-	int	n;
-	int	resultat;
+	int			i;
+	int			n;
+	long int	resultat;
 
 	i = 0;
 	n = 1;
@@ -49,9 +49,36 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	while (ft_isdigit(str[i]))
+		resultat = 10 * resultat + str[i++] - '0';
+	if (str[i] != 0 && ft_isdigit(str[i]) == 0)
+		return (0);
+	resultat = resultat * n;
+	if (resultat < INT_MIN || resultat > INT_MAX)
+		return (0);
+	return (resultat);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+	size_t	result;
+
+	if (n == 0)
+		return (0);
+	i = 0;
+	result = 0;
+	while (((unsigned char)s1[i] != '\0')
+		&& ((unsigned char)s2[i] != '\0')
+		&& (i < n - 1))
 	{
-		resultat = 10 * resultat + str[i] - '0';
-		i++;
+		if ((unsigned char)s1[i] == (unsigned char)s2[i])
+		{
+			i++;
+		}
+		else
+		{
+			break ;
+		}
 	}
-	return (resultat * n);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

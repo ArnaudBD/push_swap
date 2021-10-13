@@ -12,31 +12,28 @@
 
 #include "push_swap.h"
 
-t_list	*insert_on_top(t_list *stack, int number)
+t_list	*insert_on_top(t_list *stack, int number, char c)
 {
 	t_list	*new;
+	t_list	*current[2];
 
+	current[0] = stack;
+	current[1] = NULL;
+	if (number == 0 && c != '0')
+	{
+		write(1, "error\n", 6);
+		freelist(current);
+		return (stack);
+	}
 	new = malloc(sizeof(*new));
 	if (new == NULL)
-		exit(2);
+	{
+		write(1, "Error\n", 6);
+		return (NULL);
+	}
 	new->value = number;
 	new->next = stack;
 	stack = new;
-	return (stack);
-}
-
-t_list	*create_with_string_args(t_list *stack, const char **argv, int i)
-{
-	char	**tab;
-
-	tab = ft_split(argv[1], ' ');
-	while (tab[i + 1] != NULL)
-		i++;
-	while (i >= 0)
-	{
-		stack = insert_on_top(stack, ft_atoi(tab[i]));
-		stack->pos = i-- + 1;
-	}
 	return (stack);
 }
 
@@ -45,17 +42,15 @@ t_list	*create_stack(t_list *stack, int argc, const char **argv)
 	int		i;
 
 	i = 0;
-	if (argc > 2)
+	if (argc >= 2)
 	{
 		i = argc - 1;
 		while (i > 0)
 		{
-			stack = insert_on_top(stack, ft_atoi(argv[i]));
+			stack = insert_on_top(stack, ft_atoi(argv[i]), argv[i][0]);
 			stack->pos = i--;
 		}
 	}
-	else if (argc == 2)
-		stack = create_with_string_args(stack, argv, i);
 	stack = targeter(stack);
 	return (stack);
 }
@@ -95,5 +90,6 @@ void	freelist(t_list **stack)
 		stack[1] = current[1];
 	}
 	free(current[1]);
+	exit(1);
 	return ;
 }
