@@ -18,7 +18,12 @@ int	ft_strlen(const char *s)
 
 	i = 0;
 	while (s[i])
+	{
 		i++;
+	}
+	write(1, "OK\n", 3);
+	printf("i = %d\n", i);
+	printf("s == %s\n", s);
 	return (i);
 }
 
@@ -61,12 +66,10 @@ long int	ft_atoi(const char *str)
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
-	size_t	result;
 
 	if (n == 0)
 		return (0);
 	i = 0;
-	result = 0;
 	while (((unsigned char)s1[i] != '\0')
 		&& ((unsigned char)s2[i] != '\0')
 		&& (i < n - 1))

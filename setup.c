@@ -21,14 +21,14 @@ t_list	*insert_on_top(t_list *stack, int number, char c)
 	current[1] = NULL;
 	if (number == 0 && c != '0')
 	{
-		write(1, "error\n", 6);
+		write(2, "Error\n", 6);
 		freelist(current);
 		return (stack);
 	}
 	new = malloc(sizeof(*new));
 	if (new == NULL)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (NULL);
 	}
 	new->value = number;

@@ -16,11 +16,9 @@ int	set_target_one(t_list *stack)
 {
 	t_list	*current;
 	int		last_assigned;
-	int		max;
 
 	current = stack;
 	last_assigned = current->value;
-	max = current->value;
 	while (current != NULL)
 	{
 		if (current->value < last_assigned)

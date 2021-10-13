@@ -18,7 +18,7 @@ int	main(int argc, char const *argv[])
 	int		i;
 
 	i = 0;
-	if (check_errors(argc, argv) < 0)
+	if (check_errors(argv) < 0)
 		return (1);
 	stack[0] = NULL;
 	stack[1] = NULL;

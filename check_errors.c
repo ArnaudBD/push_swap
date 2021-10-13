@@ -26,7 +26,7 @@ int	check_double(char const *argv[])
 		{
 			if (ft_strncmp(argv[i], argv[j], 20) == 0)
 			{
-				write(1, "Error\n", 6);
+				write(2, "Error\n", 6);
 				return (-1);
 			}
 			j++;
@@ -36,15 +36,14 @@ int	check_double(char const *argv[])
 	return (0);
 }
 
-int	check_errors(int argc, char const *argv[])
+int	check_errors(char const *argv[])
 {
 	int	i;
-	int	j;
 
 	i = 1;
 	if (argv[1] == 0)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (-1);
 	}
 	i = 1;
@@ -55,7 +54,7 @@ int	check_errors(int argc, char const *argv[])
 	{
 		if (ft_atoi(argv[i]) > INT_MAX || ft_atoi(argv[i]) < INT_MIN)
 		{
-			write(1, "Error\n", 6);
+			write(2, "Error\n", 6);
 			return (-1);
 		}
 		i++;
