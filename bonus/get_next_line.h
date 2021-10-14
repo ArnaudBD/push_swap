@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abiju-du <abiju-du@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 14:45:39 by abiju-du          #+#    #+#             */
-/*   Updated: 2021/10/11 18:27:05 by abiju-du         ###   ########.fr       */
+/*   Created: 2021/04/13 15:38:18 by abiju-du          #+#    #+#             */
+/*   Updated: 2021/10/14 18:33:49 by abiju-du         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include <stdlib.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFFER_SIZE 10
 # include <stdio.h>
+# include <stdlib.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <string.h>
 # include <limits.h>
 
 typedef struct s_list
@@ -26,27 +32,28 @@ typedef struct s_list
 	int				up;
 	struct s_list	*next;
 }	t_list;
-// main.c
-void		show_stacks(t_list *stacka, t_list *stackb);
 
-// stack_ops.c
-t_list		*restore_pos(t_list *stack);
-t_list		*swap(t_list *stack);
-t_list		*rotate(t_list *stack, int ab);
-t_list		*reverse_rotate(t_list *stack, int ab);
-void		push(t_list **stack, char dest);
+int			get_next_line(int fd, char **line);
+char		*mv_next_line(char **line_dest, char *str);
+int			n_search(char *str);
+void		ft_putnbr_fd(int nb, int fd);
+void		ft_putstr_fd(char *s, int fd);
+char		*ft_strjoin(char const *s1, char const *s2);
+size_t		ft_strlen(char const *str);
+char		*first_line(char *str);
+char		*cut_first_line(char *str);
+int			mv_first_line(char *str, char **dest);
+char		*sup_first_line(char *str);
+void		*ft_memmove(void *dst, const void *src, size_t len);
+void		do_the_move(char *str, t_list **stack, \
+			t_list **stackA, t_list **stackB);
 
-// utils.c
-int			ft_strlen(const char *s);
-int			ft_isdigit(int c);
-long int	ft_atoi(const char *str);
+// checker
+void		c_swap(t_list **stack);
+void		c_rotate(t_list **stack);
+void		c_reverse_rotate(t_list **stack);
+void		c_push(t_list **stack, char dest);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
-
-// 3n_sort.c
-t_list		*three_numbers_sort(t_list *stack);
-
-// 5n_sort.c
-void		five_numbers_sort(t_list **stack);
 
 // setup.c
 t_list		*insert_on_top(t_list *stack, int number, char c);
@@ -55,26 +62,21 @@ t_list		*create_stack(t_list *stack, int argc, const char **argv);
 int			stack_size(t_list *stack);
 void		freelist(t_list **stack);
 
-// big_sort.c
-void		big_sort(t_list **stack);
-void		move_to_b(t_list **stack);
-t_list		*choose_base(t_list **stack);
-t_list		*choose_mover(t_list *stack);
-void		movers_move(t_list **stack);
-
-// moving.c
-t_list		*upset(t_list *stack);
-int			isup(int pos, int size);
-void		distance_set(t_list **stack);
-int			distance_calculator(t_list **stack, int sizeA, int sizeB);
-
 // target.c
 int			target_max(t_list *stack);
 t_list		*targeter(t_list *stack);
 int			count_int(t_list *stack);
 
+// utils.c
+int			ft_isdigit(int c);
+long int	ft_atoi(const char *str);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+
 // check_errors.c
 int			check_double(char const *argv[]);
 int			check_errors(char const *argv[]);
+
+// show stacks
+void		show_stacks(t_list *stacka, t_list *stackb);
 
 #endif

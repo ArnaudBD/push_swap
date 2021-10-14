@@ -6,12 +6,11 @@
 /*   By: abiju-du <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 08:26:58 by abiju-du          #+#    #+#             */
-/*   Updated: 2021/10/13 12:02:01 by abiju-du         ###   ########.fr       */
+/*   Updated: 2021/04/13 15:40:24 by abiju-du         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "../../push_swap.h"
 
 int	n_search(char *str)
 {
@@ -21,7 +20,7 @@ int	n_search(char *str)
 		return (-1);
 	i = 0;
 	while (str[i] != '\n' && str[i] != 0)
-			i++;
+		i++;
 	if (str[i] == '\n')
 		return (i);
 	else
@@ -42,7 +41,7 @@ int	mv_first_line(char *str, char **dest)
 	while (str[i] != '\n' && str[i] != 0 && str[i] != EOF)
 		i++;
 	dest[0] = malloc(sizeof(char) * i + 1);
-	if (!dest[0])
+	if (!(dest[0]))
 		return (-1);
 	dest[0][i--] = 0;
 	while (i >= 0)
@@ -66,40 +65,53 @@ char	*sup_first_line(char *str)
 	new_str = NULL;
 	while (str[i] != '\n' && str[i] != 0)
 		i++;
-	if ((len - i - 1) >= 0)
+	if ((len - i++ - 1) >= 0)
 	{
 		new_str = malloc(sizeof(*new_str) * len + 1);
-		if (!new_str)
+		if (!(new_str))
 			return (0);
-		i++;
 		while (j < len)
-			new_str[j++] = str[i++];
+		{
+			new_str[j] = str[i++];
+			j++;
+		}
 		new_str[j] = 0;
 	}
 	free(str);
 	return (new_str);
 }
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char		*dst_cpy;
-	char		*src_cpy;
+	size_t	i;
 
-	dst_cpy = (char *)dst;
-	src_cpy = (char *)src;
-	if (dst == src)
-		return (dst);
-	if (src_cpy < dst_cpy)
+	if (n == 0)
+		return (0);
+	i = 0;
+	while (((unsigned char)s1[i] != '\0')
+		&& ((unsigned char)s2[i] != '\0')
+		&& (i < n - 1))
 	{
-		while (len--)
-			*(dst_cpy + len) = *(src_cpy + len);
-		return (dst);
+		if ((unsigned char)s1[i] == (unsigned char)s2[i])
+		{
+			i++;
+		}
+		else
+		{
+			break ;
+		}
 	}
-	else
-	{
-		while (len--)
-			*dst_cpy++ = *src_cpy++;
-	}
-	return (dst);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
+size_t	ft_strlen(const char *s)
+{
+	int			i;
+
+	if (s == NULL || *s == 0)
+		return (0);
+	i = 0;
+	while (s[i] != 0)
+		i++;
+	return (i);
+}

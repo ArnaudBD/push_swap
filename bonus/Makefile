@@ -1,18 +1,15 @@
-NAME =	push_swap
+CHECKER =	checker
 
-SRCS = 						3n_sort.c\
-							5n_sort.c\
-							big_sort.c\
+C_SRCS = 					get_next_line.c\
+							get_next_line_utils.c\
 							main.c\
+							checker_stack_ops.c\
 							setup.c\
-							stack_ops.c\
-							utils.c\
-							moving.c\
-							distance.c\
 							target.c\
+							utils.c\
 							check_errors.c
 
-OBJS =	$(SRCS:.c=.o)
+C_OBJS =	$(C_SRCS:.c=.o)
 
 CC =	gcc
 
@@ -23,16 +20,16 @@ RM = 	rm -f
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME) : $(OBJS)
-	$(CC) $(CFLAG) $^ -o $(NAME)
+$(CHECKER) : $(C_OBJS)
+	$(CC) $(CFLAG) $^ -o $(CHECKER)
 
-all : $(NAME)
+all : $(CHECKER)
 
 clean :
-		$(RM) $(OBJS)
+		$(RM) $(C_OBJS)
 
 fclean : clean
-		$(RM) $(NAME)
+		$(RM) $(CHECKER)
 
 re : fclean all
 

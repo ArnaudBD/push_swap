@@ -10,58 +10,75 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../push_swap.h"
+#include "get_next_line.h"
 
-t_list	*c_swap(t_list *stack)
+t_list	*restore_pos(t_list *stack)
 {
-	t_list	*temp;
+	int		i;
+	t_list	*current;
 
-	if (stack == NULL || stack->next == NULL)
-		return (NULL);
-	temp = stack->next;
-	stack->next = stack->next->next;
-	temp->next = stack;
-	stack = temp;
-	stack = restore_pos(stack);
+	i = 1;
+	current = stack;
+	while (current != NULL)
+	{
+		current->pos = i;
+		i++;
+		current = current->next;
+	}
 	return (stack);
 }
 
-t_list	*c_rotate(t_list *stack)
+void	c_swap(t_list **stack)
+{
+	t_list	*temp;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+		return ;
+	temp = (*stack)->next;
+	(*stack)->next = (*stack)->next->next;
+	temp->next = *stack;
+	*stack = temp;
+	*stack = restore_pos(*stack);
+	return ;
+}
+
+void	c_rotate(t_list **stack)
 {
 	t_list	*last;
 	t_list	*tmp;
 
-	last = stack;
-	tmp = stack;
-	if (stack->next == NULL)
-		return (stack);
-	stack = stack->next;
+	last = *stack;
+	tmp = *stack;
+	if ((*stack)->next == NULL)
+		return ;
+	*stack = (*stack)->next;
 	while (last->next != NULL)
 		last = last->next;
 	last->next = tmp;
 	tmp->next = NULL;
-	stack = restore_pos(stack);
-	return (stack);
+	*stack = restore_pos(*stack);
+	return ;
 }
 
-t_list	*c_reverse_rotate(t_list *stack)
+void	c_reverse_rotate(t_list **stack)
 {
 	t_list	*last;
 	t_list	*tmp;
 
-	last = stack;
-	if (stack->next == NULL)
-		return (stack);
+	last = *stack;
+	if ((*stack)->next == NULL)
+		return ;
 	while (last->next != NULL)
 	{
 		if (last->next->next == NULL)
 			tmp = last;
 		last = last->next;
 	}
-	last->next = stack;
+	last->next = *stack;
 	tmp->next = NULL;
 	last = restore_pos(last);
-	return (last);
+	*stack = last;
+	return ;
 }
 
 void	c_push(t_list **stack, char dest)
