@@ -19,7 +19,7 @@ int	main(int argc, char const *argv[])
 
 	i = 0;
 	if (check_errors(argv) < 0)
-		return (1);
+		return (0);
 	stack[0] = NULL;
 	stack[1] = NULL;
 	stack[0] = create_stack(stack[0], argc, argv);

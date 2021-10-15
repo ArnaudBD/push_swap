@@ -42,10 +42,7 @@ int	check_errors(char const *argv[])
 
 	i = 1;
 	if (argv[1] == 0)
-	{
-		write(2, "Error\n", 6);
 		return (-1);
-	}
 	i = 1;
 	if (check_double(argv) == -1)
 		return (-1);

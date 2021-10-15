@@ -36,13 +36,14 @@ RM = 	rm -f
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+all : $(NAME)
+
 $(CHECKER) : $(C_OBJS)
 	$(CC) $(CFLAG) $^ -o $(CHECKER)
 
 $(NAME) : $(OBJS)
 	$(CC) $(CFLAG) $^ -o $(NAME)
 
-all : $(NAME)
 
 bonus : all $(CHECKER)
 
