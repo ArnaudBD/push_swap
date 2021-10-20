@@ -18,7 +18,7 @@ CFLAG =	-g -Wall -Werror -Wextra -fsanitize=address
 RM = 	rm -f
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAG) -c $< -o $@
 
 $(CHECKER) : $(C_OBJS)
 	$(CC) $(CFLAG) $^ -o $(CHECKER)
